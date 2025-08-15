@@ -25,6 +25,18 @@ const PlaceDetails = ({ place }) => {
             />
             <CardContent>
                 <Typography gutterBottom variant="h5">{place.name}</Typography>
+
+                <Box display="flex" justifyContent="space-between">
+                    <Rating name='read-only' size='small' value={Number(place.rating)} readOnly />
+
+
+                    <Typography variant="subtitle1" gutterBottom> out of 
+                        {place.num_reviews} reviews
+                    </Typography>
+
+                </Box>
+
+
                 <Box display="flex" justifyContent="space-between">
 
                     <Typography variant="subtitle1" gutterBottom>
@@ -36,10 +48,10 @@ const PlaceDetails = ({ place }) => {
 
                 </Box>
 
-                  <Box display="flex" justifyContent="space-between">
+                <Box display="flex" justifyContent="space-between">
 
-                    <Typography variant="subtitle1" gutterBottom>   
-                       Ranking
+                    <Typography variant="subtitle1" gutterBottom>
+                        Ranking
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom>
                         {place.ranking}
@@ -51,37 +63,37 @@ const PlaceDetails = ({ place }) => {
                         <img src={award.images.small} alt={award.display_name} />
                         <Typography variant="subtitle2" color="textSecondary">{award.display_name}</Typography>
 
-                    </Box>                  
+                    </Box>
 
                 ))}
 
-                {place?.cuisine?.map(({name})=>( 
-                    <Chip key={name} size="small" label={name}  />
+                {place?.cuisine?.map(({ name }) => (
+                    <Chip key={name} size="small" label={name} />
                 ))}
 
                 {place?.address && (
                     <Typography gutterBottom variant="body2" color="textSecondary" sx={PlaceDetailsSx.subtitle} >
-                    <LocationOnIcon/> {place.address}
+                        <LocationOnIcon /> {place.address}
 
                     </Typography>
                 )}
 
-                {place?.phone &&(
-                     <Typography gutterBottom variant="body2" color="textSecondary" sx={PlaceDetailsSx.spacing}>
-                    <PhoneIcon /> {place.phone}
+                {place?.phone && (
+                    <Typography gutterBottom variant="body2" color="textSecondary" sx={PlaceDetailsSx.spacing}>
+                        <PhoneIcon /> {place.phone}
                     </Typography>
 
                 )}
             </CardContent>
             <CardActions>
-               <Button size="small" color="primary" onClick={()=>window.open(place.web_url, '_blank')}>
+                <Button size="small" color="primary" onClick={() => window.open(place.web_url, '_blank')}>
                     Trip Advisor
                 </Button>
-                <Button size="small" color="primary" onClick={()=>window.open(place.website, '_blank')}>
+                <Button size="small" color="primary" onClick={() => window.open(place.website, '_blank')}>
                     Website
                 </Button>
-               
-             
+
+
             </CardActions>
 
 
