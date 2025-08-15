@@ -7,10 +7,9 @@ import Rating from '@mui/material/Rating';
 import MapSx from './styles';
 
 
-const Map = () => {
+const Map = ({setCoordinates,setBounds,coordinates}) => {
     const isMobile = useMediaQuery('(min-width:600px)');
 
-    const coordinates = { lat: 0, lng: 0 }; // Replace with actual coordinates
 
     return (
         <Box sx={MapSx.mapContainer}>
@@ -23,7 +22,10 @@ const Map = () => {
                 defaultZoom={14}
                 margin={[50, 50, 50, 50]}
                 options={''}
-                onChange={''}
+                onChange={(e)=>{
+                    setCoordinates({ lat: e.center.lat, lng: e.center.lng });
+                    setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+                }}
                 onChildClick={''} 
             
             />

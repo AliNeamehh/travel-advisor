@@ -4,18 +4,12 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails';
 
 import ListSx from './styles';
 
-const List = () => {
+const List = ({places}) => {
 
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
 
-  const places = [
-    { name: 'Place 1', type: 'restaurant', rating: 4.5 },
-    { name: 'Place 2', type: 'hotel', rating: 4.0 },
-    { name: 'Place 3', type: 'attraction', rating: 3.5 },
-    { name: 'Place 4', type: 'restaurant', rating: 4.2 },
-
-  ];
+ 
 
   return (
 
