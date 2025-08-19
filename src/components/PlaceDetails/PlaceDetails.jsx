@@ -3,103 +3,68 @@ import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chi
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import Rating from '@mui/material/Rating';
-
 import PlaceDetailsSx from './styles';
 
+const PlaceDetails = React.forwardRef(({ place, selected }, ref) => {
+  React.useEffect(() => {
+    if (selected && ref?.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [selected, ref]);
 
-const PlaceDetails = ({ place }) => {
+  return (
+    <Card ref={ref} elevation={6}>
+      <CardMedia
+        style={{ height: 350 }}
+        image={place.photo ? place.photo.images.large.url : 'https://media-cdn.tripadvisor.com/media/photo-w/12/55/2b/dd/evening-at-salt.jpg'}
+        title={place.name}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5">{place.name}</Typography>
 
+        <Box display="flex" justifyContent="space-between">
+          <Rating name="read-only" size="small" value={Number(place.rating)} readOnly />
+          <Typography variant="subtitle1" gutterBottom> out of {place.num_reviews} reviews</Typography>
+        </Box>
 
+        <Box display="flex" justifyContent="space-between">
+          <Typography variant="subtitle1" gutterBottom>Price</Typography>
+          <Typography variant="subtitle1" gutterBottom>{place.price_level}</Typography>
+        </Box>
 
-    return (
+        <Box display="flex" justifyContent="space-between">
+          <Typography variant="subtitle1" gutterBottom>Ranking</Typography>
+          <Typography variant="subtitle1" gutterBottom>{place.ranking}</Typography>
+        </Box>
 
-        <Card elevation={6}>
+        {place?.awards?.map((award) => (
+          <Box key={award.display_name} display="flex" justifyContent="space-between" my={1} alignItems="center">
+            <img src={award.images.small} alt={award.display_name} />
+            <Typography variant="subtitle2" color="textSecondary">{award.display_name}</Typography>
+          </Box>
+        ))}
 
+        {place?.cuisine?.map(({ name }) => <Chip key={name} size="small" label={name} />)}
 
-            <CardMedia
+        {place?.address && (
+          <Typography gutterBottom variant="body2" color="textSecondary" sx={PlaceDetailsSx.subtitle}>
+            <LocationOnIcon /> {place.address}
+          </Typography>
+        )}
 
-                style={{ height: 350 }}
-                image={place.photo ? place.photo.images.large.url : 'https://media-cdn.tripadvisor.com/media/photo-w/12/55/2b/dd/evening-at-salt.jpg'}
-                title={place.name}
+        {place?.phone && (
+          <Typography gutterBottom variant="body2" color="textSecondary" sx={PlaceDetailsSx.spacing}>
+            <PhoneIcon /> {place.phone}
+          </Typography>
+        )}
+      </CardContent>
 
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5">{place.name}</Typography>
-
-                <Box display="flex" justifyContent="space-between">
-                    <Rating name='read-only' size='small' value={Number(place.rating)} readOnly />
-
-
-                    <Typography variant="subtitle1" gutterBottom> out of 
-                        {place.num_reviews} reviews
-                    </Typography>
-
-                </Box>
-
-
-                <Box display="flex" justifyContent="space-between">
-
-                    <Typography variant="subtitle1" gutterBottom>
-                        Price
-                    </Typography>
-                    <Typography variant="subtitle1" gutterBottom>
-                        {place.price_level}
-                    </Typography>
-
-                </Box>
-
-                <Box display="flex" justifyContent="space-between">
-
-                    <Typography variant="subtitle1" gutterBottom>
-                        Ranking
-                    </Typography>
-                    <Typography variant="subtitle1" gutterBottom>
-                        {place.ranking}
-                    </Typography>
-                </Box>
-
-                {place?.awards?.map((award) => (
-                    <Box display="flex" justifyContent="space-between" my={1} alignItems="center" key={award.display_name}>
-                        <img src={award.images.small} alt={award.display_name} />
-                        <Typography variant="subtitle2" color="textSecondary">{award.display_name}</Typography>
-
-                    </Box>
-
-                ))}
-
-                {place?.cuisine?.map(({ name }) => (
-                    <Chip key={name} size="small" label={name} />
-                ))}
-
-                {place?.address && (
-                    <Typography gutterBottom variant="body2" color="textSecondary" sx={PlaceDetailsSx.subtitle} >
-                        <LocationOnIcon /> {place.address}
-
-                    </Typography>
-                )}
-
-                {place?.phone && (
-                    <Typography gutterBottom variant="body2" color="textSecondary" sx={PlaceDetailsSx.spacing}>
-                        <PhoneIcon /> {place.phone}
-                    </Typography>
-
-                )}
-            </CardContent>
-            <CardActions>
-                <Button size="small" color="primary" onClick={() => window.open(place.web_url, '_blank')}>
-                    Trip Advisor
-                </Button>
-                <Button size="small" color="primary" onClick={() => window.open(place.website, '_blank')}>
-                    Website
-                </Button>
-
-
-            </CardActions>
-
-
-
-        </Card>
-    );
-}
+      <CardActions>
+        <Button size="small" color="primary" onClick={() => window.open(place.web_url, '_blank')}>Trip Advisor</Button>
+        <Button size="small" color="primary" onClick={() => window.open(place.website, '_blank')}>Website</Button>
+      </CardActions>
+    </Card>
+  );
+});
 
 export default PlaceDetails;
