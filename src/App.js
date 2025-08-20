@@ -21,6 +21,11 @@ const App = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+      const [type, setType] = useState('restaurants');
+      const [rating, setRating] = useState('');
+
+
+      
 
     useEffect(() => {
         setChildClicked(null); 
@@ -37,14 +42,14 @@ const App = () => {
         setIsLoading(true);
         if (!bounds) return;
         console.log(coordinates, bounds);
-        getPlacesData(bounds.sw, bounds.ne)
+        getPlacesData( type, bounds.sw, bounds.ne)
             .then((data) => {
                 console.log(data);
                 setPlaces(data);
                 setIsLoading(false);
             })
 
-    }, [coordinates, bounds]);
+    }, [type, coordinates, bounds]);
 
 
 
@@ -59,6 +64,10 @@ const App = () => {
                     places={places}
                     childClicked={childClicked}
                     isLoading={isLoading}
+                    type={type}
+                    setType={setType}
+                    rating={rating}
+                    setRating={setRating}
                     />
 
 

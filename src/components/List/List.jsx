@@ -3,10 +3,9 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import ListSx from './styles';
 
-const List = ({ places, childClicked, isLoading }) => {
+const List = ({ places, childClicked, isLoading ,type,setType,rating,setRating }) => {
 
-  const [type, setType] = useState('restaurants');
-  const [rating, setRating] = useState('');
+
   const [elRefs, setElRefs] = useState([]);
 
   console.log({ childClicked })

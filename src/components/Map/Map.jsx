@@ -3,7 +3,6 @@ import GoogleMapReact from 'google-map-react';
 import { Box, Paper, Typography, useMediaQuery } from '@mui/material';
 import LocationOnOutlineIcon from '@mui/icons-material/LocationOnOutlined';
 import Rating from '@mui/material/Rating';
-
 import MapSx from './styles';
 
 
