@@ -5,8 +5,11 @@ import LocationOnOutlineIcon from '@mui/icons-material/LocationOnOutlined';
 import Rating from '@mui/material/Rating';
 import MapSx from './styles';
 
+import mapStyles from './mapStyles';
 
-const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }) => {
+
+const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked ,WeatherData
+}) => {
     const isDesktop = useMediaQuery('(min-width:600px)');
 
     console.log('Map render coordinates:', coordinates);
@@ -23,7 +26,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }
                 center={coordinates}
                 defaultZoom={14}
                 margin={[50, 50, 50, 50]}
-                options={''}
+                options={{ disableDefaultUI: true ,zoomControl: true ,styles:mapStyles }}
                 onChange={(e) => {
                     setCoordinates({ lat: e.center.lat, lng: e.center.lng });
                     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
@@ -66,6 +69,16 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }
                         </div>
                     );
                 })}
+
+
+            {WeatherData?.weather?.map((data, i) => (
+                <div key={i} lat={WeatherData.coord.lat} lng={WeatherData.coord.lon}>
+                    <img src={`http://openweathermap.org/img/w/${WeatherData.weather[0].icon}.png`} height="70px" />
+
+                </div>
+            ))}
+
+
             </GoogleMapReact>
         </Box>
 
