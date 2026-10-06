@@ -1,26 +1,37 @@
 # Travel Advisor
 
-A React web app that helps users discover restaurants, hotels, and attractions on an interactive map.
-
-[**Live Demo on Netlify →**](https://YOUR_NETLIFY_URL)  
-
+A React web application for discovering restaurants, hotels, and attractions using an interactive map.
 
 ![App Screenshot](./public/app_screenshot.png)
 
 ## Features
-- Google Maps integration
-- Real‑time weather data
-- Filtering by type & rating
-- Responsive design
+
+- Interactive Google Maps integration
+- Weather information
+- Filtering by place type and rating
+- Responsive user interface
 
 ## Tech Stack
-- React + (Material UI )
+
+- React
+- Material UI
 - Google Maps JavaScript API
-- OpenWeather API (or the one you use)
+- Weather API integration
 
 ## Getting Started
+
+Install dependencies:
+
 ```bash
 npm install
+```
 
-npm start    
+Start the application:
 
+```bash
+npm start
+```
+
+## Purpose
+
+This project demonstrates frontend API integration, map-based interfaces, filtering, and responsive React development.
